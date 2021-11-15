@@ -12,19 +12,19 @@ namespace cse210_batter_csharp.Scripting
             {
                 foreach (Actor actor in group)
                 {
-                    if(actor.GetTopEdge()<0)
+                    if(actor.GetTopEdge()<=0)
                     {
                         bounceActorY(actor);
                     }
-                    else if(actor.GetBottomEdge()>Constants.MAX_Y)
+                    else if(actor.GetBottomEdge()>=Constants.MAX_Y)
                     {
                         bounceActorY(actor);
                     }
-                    else if(actor.GetLeftEdge()<0)
+                    else if(actor.GetLeftEdge()<=0)
                     {
                         bounceActorX(actor);
                     }
-                    else if(actor.GetRightEdge()>Constants.MAX_X)
+                    else if(actor.GetRightEdge()>=Constants.MAX_X)
                     {
                         bounceActorX(actor);
                     }

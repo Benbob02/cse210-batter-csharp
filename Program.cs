@@ -53,8 +53,10 @@ namespace cse210_batter_csharp
             // TODO: Add additional actions here to handle the input, move the actors, handle collisions, etc.
             MoveActorsAction movment = new MoveActorsAction();
             HandleOffScreenAction offScreen = new HandleOffScreenAction();
+            ControlActorsAction paddlemove = new ControlActorsAction();
             script["update"].Add(movment);
             script["update"].Add(offScreen);
+            script["update"].Add(paddlemove);
 
             // Start up the game
             outputService.OpenWindow(Constants.MAX_X, Constants.MAX_Y, "Batter", Constants.FRAME_RATE);
