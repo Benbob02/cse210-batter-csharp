@@ -8,6 +8,7 @@ namespace cse210_batter_csharp.Scripting
     {
         public override void Execute(Dictionary<string, List<Actor>> cast)
         {
+            List<Actor> ballRemove = new List<Actor>();
             foreach (List<Actor> group in cast.Values)
             {
                 foreach (Actor actor in group)
@@ -18,7 +19,7 @@ namespace cse210_batter_csharp.Scripting
                     }
                     else if(actor.GetBottomEdge()>=Constants.MAX_Y)
                     {
-                        bounceActorY(actor);
+                        ballRemove.Add(actor);
                     }
                     else if(actor.GetLeftEdge()<=0)
                     {
@@ -30,6 +31,11 @@ namespace cse210_batter_csharp.Scripting
                     }
                     
                 }
+            }
+            foreach(Actor ball in ballRemove)
+            {
+                List<Actor> balls = cast["balls"];
+                balls.Remove(ball);
             }
         }
         private void bounceActorY(Actor actor)

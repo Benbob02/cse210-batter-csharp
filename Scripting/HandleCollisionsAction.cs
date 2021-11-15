@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using _08_rfk.Casting;
-using _08_rfk.Services;
+using cse210_batter_csharp.Casting;
+using cse210_batter_csharp.Services;
 
 
-namespace _08_rfk.Scripting
+
+namespace cse210_batter_csharp.Scripting
 {
     /// <summary>
     /// An action to appropriately handle any collisions in the game.
@@ -12,29 +13,46 @@ namespace _08_rfk.Scripting
     {
         PhysicsService _physicsService = new PhysicsService();
 
-        public HandleCollisionsAction(PhysicsService physicsService)
+        public HandleCollisionsAction()
         {
-            _physicsService = physicsService;
+            _physicsService = new PhysicsService();
         }
 
         public override void Execute(Dictionary<string, List<Actor>> cast)
         {
-            Actor billboard = cast["environment"][0]; // There is only one
-            Actor robot = cast["movers"][0]; // There is only one
+            List<Actor> balls = cast["balls"]; // There is only one
+            Actor paddle = cast["paddle"][0]; // There is only one
+            List<Actor> bricks = cast["bricks"]; // Get all the artifacts
+            List<Actor> brokenBrick = new List<Actor>();
 
-            List<Actor> artifacts = cast["stationary"]; // Get all the artifacts
 
-            billboard.SetText(Constants.DEFAULT_BILLBOARD_MESSAGE);
-
-            foreach (Actor actor in artifacts)
+            foreach (Actor ball in balls)
             {
-                Artifact artifact = (Artifact)actor;
-                if (_physicsService.IsCollision(robot, artifact))
+                foreach (Actor brick in bricks)
                 {
-                    string artifactText = artifact.GetDescription();
-                    billboard.SetText(artifactText);
+                    if(_physicsService.IsCollision(ball,brick))
+                    {
+                        bounceActorY(ball);
+                        brokenBrick.Add(brick);
+                    }
+                }
+                if(_physicsService.IsCollision(ball,paddle))
+                {
+                    bounceActorY(ball);
                 }
             }
+            foreach(Actor brick in brokenBrick)
+            {
+                bricks.Remove(brick);
+            }
+            brokenBrick.Clear();
+        }
+        private void bounceActorY(Actor actor)
+        {
+            int x = actor.GetVelocity().GetX();
+            int y = actor.GetVelocity().GetY();
+            y *= -1;
+            actor.SetVelocity(new Point(x,y));
         }
 
     }
