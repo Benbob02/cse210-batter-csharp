@@ -13,7 +13,7 @@ namespace cse210_batter_csharp.Scripting
             {
                 foreach (Actor actor in group)
                 {
-                    if(actor.GetTopEdge()<=0)
+                    if(actor.GetTopEdge()<=5)
                     {
                         bounceActorY(actor);
                     }

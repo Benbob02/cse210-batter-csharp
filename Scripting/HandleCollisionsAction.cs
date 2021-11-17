@@ -38,7 +38,7 @@ namespace cse210_batter_csharp.Scripting
                 }
                 if(_physicsService.IsCollision(ball,paddle))
                 {
-                    bounceActorY(ball);
+                    ball.SetVelocity(new Point(ball.GetVelocity().GetX(),-5));
                 }
             }
             foreach(Actor brick in brokenBrick)

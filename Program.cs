@@ -17,21 +17,57 @@ namespace cse210_batter_csharp
             cast["bricks"] = new List<Actor>();
 
             // TODO: Add your bricks here
-            
+            int startbrick = 1;
+            int brick = startbrick;
             for(int x = 10; x < Constants.MAX_X - Constants.BRICK_WIDTH;x += Constants.BRICK_WIDTH + 10)
             {
                 for(int y = 10; y <= 146;y += Constants.BRICK_HEIGHT + 10)
                 {
-                    cast["bricks"].Add(new Brick(x,y));
+                    if(brick == 1)
+                    {
+                        cast["bricks"].Add(new Brick(x,y,Constants.IMAGE_BRICK1));
+                    }
+                    else if(brick == 2)
+                    {
+                        cast["bricks"].Add(new Brick(x,y,Constants.IMAGE_BRICK3));
+                    }
+                    else if(brick == 3)
+                    {
+                        cast["bricks"].Add(new Brick(x,y,Constants.IMAGE_BRICK4));
+                    }
+                    else if(brick == 4)
+                    {
+                        cast["bricks"].Add(new Brick(x,y,Constants.IMAGE_BRICK5));
+                    }
+
+                    if(brick < 4)
+                    {
+                        brick += 1;
+                    }
+                    else
+                    {
+                        brick = 1;
+                    }
+                    
                 }
+                if (startbrick < 4)
+                {
+                    startbrick += 1;
+                }
+                else
+                {
+                    startbrick = 1;
+                }
+                
+                brick = startbrick;
             }
             // The Ball (or balls if desired)
             cast["balls"] = new List<Actor>();
 
             // TODO: Add your ball here
             cast["balls"].Add(new Ball(Constants.MAX_X/2,Constants.MAX_Y/2));
-            cast["balls"].Add(new Ball(Constants.MAX_X/4,Constants.MAX_Y/4));
-            cast["balls"].Add(new Ball(Constants.MAX_X/3,Constants.MAX_Y/3));
+            // cast["balls"].Add(new Ball(Constants.MAX_X/4,Constants.MAX_Y/4));
+            // cast["balls"].Add(new Ball(Constants.MAX_X/3,Constants.MAX_Y/3));
             // The paddle
             cast["paddle"] = new List<Actor>();
 

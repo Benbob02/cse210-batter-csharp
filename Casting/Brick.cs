@@ -7,12 +7,13 @@ namespace cse210_batter_csharp.Casting
     /// </summary>
     public class Brick: Actor
     {
-        public Brick(int x, int y)
+        public Brick(int x, int y, string image)
         {
             SetWidth(Constants.BRICK_WIDTH);
             SetHeight(Constants.BRICK_HEIGHT);
             SetPosition(new Point(x,y));
-            SetImage(Constants.IMAGE_BRICK);
+            SetImage(image);
+            
         }
 
 

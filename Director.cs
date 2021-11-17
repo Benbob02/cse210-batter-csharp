@@ -35,17 +35,26 @@ namespace cse210_batter_csharp
                 CueAction("input");
                 CueAction("update");
                 CueAction("output");
+
                 if(_cast["balls"].Count <= 0  || _cast["bricks"].Count <= 0)
                 {
                     _keepPlaying = false;
                 }
+                
                 if (Raylib_cs.Raylib.WindowShouldClose())
                 {
                     _keepPlaying = false;
                 }
             }
 
-            Console.WriteLine("Game over!");
+            if(_cast["bricks"].Count > 0)
+            {
+                Console.WriteLine("You Lose");
+            }
+            else
+            {
+                Console.WriteLine("You Win");
+            }
         }
 
         /// <summary>
